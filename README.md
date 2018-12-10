@@ -3,7 +3,7 @@ check-in software that utilizes face recognition
 
 *Must use on a computer with a webcam to do the demo!*
 
-To log in:
+To log in:<br>
 Email: guestelem@guest.com
 Password: guestpw2!
 
