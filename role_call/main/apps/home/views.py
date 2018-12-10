@@ -154,7 +154,8 @@ def roster_list(request):
 def view_roster(request, id):
 	roster= Attendance.objects.get(id=id)
 	children= roster.children.all()
-	all_children= Child.objects.all()
+	school = School.objects.get(id=request.session['id'])
+	all_children= school.children.all()
 	context = {
 		'roster': roster,
 		'children': children,
@@ -183,7 +184,7 @@ def register_child(request):
 def submit_child(request):
 	school= School.objects.get(id=request.session['id'])
 	parent= Parent.objects.get(id=request.POST['parent'])
-	image = face_recognition.load_image_file(request.POST['face_code'])
+	# image = face_recognition.load_image_file(request.POST['face_code'])
 	# try:
 	# 	face_code= face_recognition.face_encodings(image)[0]
 	# 	face_code = face_code.tolist()
@@ -191,7 +192,8 @@ def submit_child(request):
 	# except:
 	# 	messages.add_message(request, messages.ERROR, "No faces found in submitted picture.\n Please try again.")
 	# 	return redirect("/register_child")
-	Child.objects.create(first_name=request.POST['first_name'],last_name=request.POST['last_name'],parent=parent,school=school,age=request.POST['age'],grade=request.POST['grade'],allergies=request.POST['allergies'],conditions=request.POST['conditions'],profile_image="/static/rolecall/css/"+request.POST['face_code'],face_code="",status="Absent")
+	Child.objects.create(first_name=request.POST['first_name'],last_name=request.POST['last_name'],parent=parent,school=school,age=request.POST['age'],grade=request.POST['grade'],allergies=request.POST['allergies'],conditions=request.POST['conditions'],face_code="",status="Absent")
+	# profile_image="/static/rolecall/css/"+request.POST['face_code'] -- "Use something like this when a full picture path is able to be used."
 	return redirect("/face_code")
 
 def face_code(request):
