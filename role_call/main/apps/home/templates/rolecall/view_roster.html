@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>{{ roster.date }}</title>
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+</head>
+<body>
+<h1 class="col-10"style="display: inline-block;">{{ roster.date }}</h1>
+<h3 class="col-1" style="text-align: right; display: inline-block;"><a href="/roster_list">Back</a></h3>
+<br />
+<h2>Children Present:</h2>
+<table class="table">
+	<tr>
+		<th>Name</th>
+		<th>Grade</th>
+		<th>Age</th>
+	</tr>
+	{% for child in children %}
+		<tr>
+			<th>{{ child.first_name }} {{ child.last_name }}</th>
+			<th>{{ child.grade }}</th>
+			<th>{{ child.age }}</th>
+		</tr>
+	{% endfor %}
+</table><br />
+<h2>Children Absent:</h2>
+<table class="table">
+	<tr>
+		<th>Name</th>
+		<th>Grade</th>
+		<th>Age</th>
+	</tr>
+	{% for child in all_children %}
+		{% if child not in children %}
+		<tr>
+			<td>{{ child.first_name }} {{ child.last_name }}</td>
+			<td>{{ child.grade }}</td>
+			<td>{{ child.age }}</td>
+		</tr>
+		{% endif %}
+	{% endfor %}
+</table>
+</body>
+</html>

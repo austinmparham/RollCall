@@ -1,0 +1,40 @@
+
+
+#banner img {
+	height: auto;
+	width: 100%;
+	display: block;
+}
+
+#portal {
+	text-align: center;
+	margin: 30px;
+}
+
+#portal table{
+	text-align: left;
+}
+#portal form{
+	display: inline-block;
+}
+
+.left {
+	text-align: center;
+}
+
+.right {
+	vertical-align: top;
+	text-align: right;
+}
+
+span:hover .profile_image {
+	display:block;
+}
+
+.profile_img img{
+	image-orientation: from-image;
+}
+
+.upright{
+	image-orientation:from-image;
+}

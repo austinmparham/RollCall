@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Welcome to Role Call</title>
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+	{% load static %}
+	<link rel="stylesheet" type="text/css" href="{% static 'rolecall/css/style.css' %}">
+</head>
+<body>
+	<div id="banner">{% load static %}<img src="{% static 'rolecall/css/rc_banner1.jpg' %}" alt="rc_banner.jpg"></div>
+	<div class="bg-info" style="height: 50px; padding-top: 5px; padding-right: 5px;">
+		<h4 style="text-align: right;"><a href="/logout" class="btn btn-secondary">Logout</a></h4>
+	</div>
+	<div class="container"><h2 style="text-align: center;">{{ user.name }}'s Role Call</h2>
+	{% if messages %}
+		{% for message in messages %}
+			{% if message %}
+			<h2>{{message}}</h2>
+			{% endif %}
+		{% endfor %}
+	{% endif %}
+	<h3><a href="/new_day" class="btn btn-info btn-block btn-lg">Create a New Roster</a></h3>
+	<h3><a href="/roster_list" class="btn btn-info btn-block btn-lg">View Previous Rosters</a></h3>
+	<h3><a href="/view_kids" class="btn btn-info btn-block btn-lg">View currently enrolled kids</a></h3>
+	</div>
+</body>
+</html>

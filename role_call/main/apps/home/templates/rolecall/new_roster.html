@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title> {{ user.name }} Roster: {{ date_today }}</title>
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+	{% load static %}
+	<link rel="stylesheet" type="text/css" href="{% static 'rolecall/css/style.css' %}">
+	<script type="text/javascript" src='http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js'></script>
+	<script type="text/javascript">
+		$(document).ready(function(){
+			{% for child in children %}
+			$('#{{child.id}}_photo img').hide();
+			{% endfor %}
+			{% for child in children %}
+				$('#{{ child.id }}').hover(function(){
+					$('#{{child.id}}_photo img').show()},
+					function(){
+					$('#{{child.id}}_photo img').hide();
+				});
+			{% endfor %}
+
+		});
+	</script>
+</head>
+<body>
+<div id="banner">{% load static %}<img src="{% static 'rolecall/css/rc_banner1.jpg' %}" alt="rc_banner.jpg"></div>
+	<div class= "row col-8" style="display: inline-block;">
+	<h3 style="text-align: center;">{{ user.name }} Roster: {{ date_today }}</h3> <!-- find out date syntax for {{ date }}-->
+	</div>
+	<div class= "row col-4" style="display: inline-block; vertical-align: top; text-align: right;">
+		<h4><a href="/back">Back</a> | <a href="/logout" style="text-align: right">Logout</a></h4>
+	</div>
+
+	<p>Check In with Photo:
+	<form action="/photo_check" method="post">
+		{% csrf_token %}
+		<input type="file" name="check_face">
+		<input type="submit" value="Submit">
+	</form>
+	<a href="/live_check">Begin the Live Check-In</a></p>
+	<table class="table table-striped">
+		<tr>
+			<th>Name</th>
+			<th>Grade</th>
+			<th>Age</th>
+			<th>Status</th>
+			<th>Action</th>
+		</tr>
+{% for child in children %}
+	<tr>
+		<td><a href="" id="{{ child.id }}">{{ child.first_name }} {{ child.last_name }}</a>
+			<div id="{{child.id}}_photo" class="profile_img"><img src="{{child.profile_image}}" alt="{{child.first_name}} photo" style="width: 100px; height:100px" class="rotate90"></div></td>
+		<td>{{ child.grade }}</td>
+		<td>{{ child.age}}</td>
+		<td>{{ child.status }}</td>
+		<td>{% if child.status == "Absent" %}
+				<a href="/check_in/{{ child.id }}" class="btn btn-primary">Check In</a>
+			{% else %}
+				<a href="/remove_child/{{ child.id }}" class="btn btn-danger">Remove</a>
+			{% endif %}
+		</td>
+	</tr>
+{% endfor %}
+	<tr>
+		<td></td>
+		<td></td>
+		<td></td>
+		<td></td>
+		<td><a href="/submit_roster" class="btn btn-success btn-lg">Submit Roster</a></td>
+
+	</tr>
+	</table>
+
+</body>
+</html>

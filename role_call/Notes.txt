@@ -1,0 +1,12 @@
+/static/rolecall/css/Test2-austin.jpg
+
+{% static 'rolecall/css/Test2-austin.jpg' %} -- worked
+
+{%static 'rolecall/css/Test1-austin.jpg'%} -- did not work butter
+
+{% static 'rolecall/css/Test1-austin.jpg'%} -- did not work salami
+
+{% static 'rolecall/css/Test1-austin.jpg' %} -- did not work Avocado
+
+"{% static 'rolecall/css/"+request.POST['face_code']+"' %}" -- Views attempt
+
